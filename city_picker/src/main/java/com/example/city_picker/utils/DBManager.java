@@ -3,7 +3,6 @@ package com.example.city_picker.utils;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
 
 import com.example.city_picker.CityBean;
 
@@ -44,8 +43,7 @@ public class DBManager {
 
     private DBManager(Context context) {
         mContext = context.getApplicationContext();
-        DB_PATH = File.separator + "data" + Environment.getDataDirectory().getAbsolutePath() +
-                File.separator + mContext.getPackageName() + File.separator + "databases" + File.separator;
+        DB_PATH=context.getExternalFilesDir(null).getAbsolutePath()+File.separator;
         L.d(DB_PATH);
         loadDefaultCityList();
     }
@@ -58,16 +56,13 @@ public class DBManager {
         }
         try {
             InputStream is = mContext.getResources().getAssets().open(DB_NAME);
-            File path = new File(DB_PATH);
-            if (path.mkdirs()) {
-                FileOutputStream fos = new FileOutputStream(databaseFile);
-                int len;
-                byte[] buf = new byte[1024];
-                while ((len = is.read(buf)) != -1) {
-                    fos.write(buf, 0, len);
-                }
-                fos.close();
+            FileOutputStream fos = new FileOutputStream(databaseFile);
+            int len;
+            byte[] buf = new byte[1024];
+            while ((len = is.read(buf)) != -1) {
+                fos.write(buf, 0, len);
             }
+            fos.close();
             is.close();
         } catch (IOException e) {
             e.printStackTrace();
