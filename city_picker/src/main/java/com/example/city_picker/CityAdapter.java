@@ -56,7 +56,7 @@ public class CityAdapter extends BaseAdapter {
             CityBean bean =null;
             for(int i=0;i<size;i++){
                 bean = mCitieAll.get(i);
-                if(bean.getPinyin().startsWith(seacherContent)){
+                if(bean.getPinyin().startsWith(seacherContent)||bean.getName().contains(seacherContent)){
                     listTemp.add(bean);
                 }
             }
@@ -104,6 +104,7 @@ public class CityAdapter extends BaseAdapter {
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.item_search, viewGroup, false);
                 editSeacher= (EditText) convertView.findViewById(R.id.id_et_search);
                 editSeacher.setText(seacherContent);
+                editSeacher.setSelection(seacherContent.length());
                 editSeacher.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -116,6 +117,16 @@ public class CityAdapter extends BaseAdapter {
                         Toast.makeText(mContext, seacherContent, Toast.LENGTH_SHORT).show();
                         initData();
                         notifyDataSetChanged();
+                        editSeacher.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(editSeacher!=null){
+                                    editSeacher.setFocusable(true);
+                                    editSeacher.setFocusableInTouchMode(true);
+                                    editSeacher.requestFocus();
+                                }
+                            }
+                        });
                     }
 
                     @Override

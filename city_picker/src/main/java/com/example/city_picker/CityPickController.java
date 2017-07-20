@@ -25,6 +25,7 @@ public class CityPickController implements LetterSideBar.OnTouchLetterListener {
     private CityAdapter mAdapter;
 
     private List<CityBean> mCities = new ArrayList<>();
+//    private Handler mHandler=new Handler();
 
 
     public CityPickController(CityListActivity context, View root) {
@@ -50,6 +51,19 @@ public class CityPickController implements LetterSideBar.OnTouchLetterListener {
                 mActivity.setResult2City(bean);
             }
         });
+//        mLvCityList.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if(hasFocus){
+//                    mHandler.postAtFrontOfQueue(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            mLvCityList.setSelection(0);
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
 
