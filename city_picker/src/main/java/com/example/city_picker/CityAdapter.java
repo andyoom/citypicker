@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.city_picker.utils.L;
 import com.example.city_picker.utils.Util;
@@ -114,7 +113,7 @@ public class CityAdapter extends BaseAdapter {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         seacherContent=s.toString();
-                        Toast.makeText(mContext, seacherContent, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, seacherContent, Toast.LENGTH_SHORT).show();
                         initData();
                         notifyDataSetChanged();
                         editSeacher.post(new Runnable() {
